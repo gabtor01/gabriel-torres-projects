@@ -13,7 +13,7 @@
 
 mkdir -p "$TEGRA_KERNEL_OUT" "$TEGRA_MODULES_OUT"
 cd "$L4T/sources"
-# defconfig
+# defconfig (Disable this line if a different .config file has been set)
 make -C kernel/kernel-4.9/ ARCH=arm64 O="$TEGRA_KERNEL_OUT" LOCALVERSION=-tegra CROSS_COMPILE=${TOOLCHAIN_PREFIX} tegra_defconfig || { echo "defconfig failed"; exit 1; }
 # build kernel
 make -C kernel/kernel-4.9/ ARCH=arm64 O="$TEGRA_KERNEL_OUT" LOCALVERSION=-tegra CROSS_COMPILE=${TOOLCHAIN_PREFIX} -j$(nproc) Image || { echo "kernel build failed"; exit 1; }
