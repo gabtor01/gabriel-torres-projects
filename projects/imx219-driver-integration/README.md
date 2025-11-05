@@ -1,7 +1,7 @@
 # IMX219 Driver Integration
 Bring-up, driver compilation, and camera testing on the **NVIDIA Jetson Nano 4GB Dev Kit** using the **IMX219** sensor.
 
-![Jetson Nano Camera Setup](docs/results/jetson-nano-camera.jpg)
+![Jetson Nano Camera Setup](docs/embedded-system.JPG)
 
 ## Overview
 - Review of IMX219 datasheet and schematic connections.
