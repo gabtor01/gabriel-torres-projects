@@ -1,0 +1,7 @@
+/media/
+*.img
+/rootfs/
+build/
+*.tar.xz
+.vscode/
+*.swp
