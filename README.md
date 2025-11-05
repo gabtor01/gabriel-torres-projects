@@ -23,7 +23,7 @@ Hi! I'm **Gabriel Torres**, an Electrical Engineer and Computer Science student.
 |---------|------------|-------------|--------|
 | [Jetson Nano Build and Flash](projects/jetson-nano-build-and-flash/README.md) | Custom Linux kernel build and flashing for Jetson Nano using SDK Manager and cross-compilation toolchains. | Embedded Linux • NVIDIA SDK Manager • Docker • GCC Linaro • UART Debugging |  Finished |
 | [IMX219 Driver Integration](projects/imx219-driver-integration/README.md)| Integration and bring-up of the Sony IMX219 camera sensor on Jetson Nano, including I2C validation, external kernel module build and GStreamer video capture testing. | Embedded Linux • Jetson Nano • IMX219 • I2C Interface • Kernel Module • GStreamer Pipeline • C| In Progress | 
-| [Pokemon Gym Battle Simulator](projects/pokemon-gym-battle-simulator/README.md) | A CLI-based gym battle simulator built with object-oriented programming. | Java | ⚙ In Progress |
+| [Pokemon Gym Battle Simulator](projects/pokemon-gym-battle-simulator/README.md) | A CLI-based gym battle simulator built with object-oriented programming. | Java | In Progress |
 
 
 ---
