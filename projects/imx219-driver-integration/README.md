@@ -1,5 +1,5 @@
 # IMX219 Driver Integration
-Bring-up, driver compilation, and camera testing on the **NVIDIA Jetson Nano 4GB Dev Kit** using the **IMX219** sensor.
+Development and testing of the **Sony IMX219-77 8MP** camera on the **NVIDIA Jetson Nano**, featuring I2C bus verification, external kernel module compilation and GStreamer video pipeline validation.
 
 ![Jetson Nano Camera Setup](docs/embedded-system.JPG)
 
