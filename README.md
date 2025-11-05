@@ -21,7 +21,7 @@ Hi! I'm **Gabriel Torres**, an Electrical Engineer and Computer Science student.
 
 | Project | Description | Technologies | Status |
 |---------|------------|-------------|--------|
-| [Jetson Nano Build and Flash](projects/jetson-nano-build-and-flash/README.md) | Custom Linux kernel build and flashing for Jetson Nano using SDK Manager and cross-compilation toolchains. | Embedded Linux • NVIDIA SDK Manager • Docker • GCC Linaro • UART Debugging | ⚙ In Progress |
+| [Jetson Nano Build and Flash](projects/jetson-nano-build-and-flash/README.md) | Custom Linux kernel build and flashing for Jetson Nano using SDK Manager and cross-compilation toolchains. | Embedded Linux • NVIDIA SDK Manager • Docker • GCC Linaro • UART Debugging |  Finished |
 | [Pokemon Gym Battle Simulator](projects/pokemon-gym-battle-simulator/README.md) | A CLI-based gym battle simulator built with object-oriented programming. | Java | ⚙ In Progress |
 
 
