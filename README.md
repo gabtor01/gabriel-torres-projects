@@ -6,7 +6,7 @@
 ![Python](https://img.shields.io/badge/Python-darkgreen)
 ![Embedded Systems](https://img.shields.io/badge/Embedded%20Systems-purple)
 
-Hi! I'm **Gabriel Torres**, an Electrical Engineer and Computer Science student. This repository is my **portfolio**, showcasing a collection of software and engineering projects demonstrating my learning process and how I apply my skills.
+Hi! I'm **Gabriel Torres**, an Electrical Engineer and a Computer Science student. This repository showcase a collection of software and engineering projects demonstrating my learning process and how I apply my skills.
 
 ---
 
