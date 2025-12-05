@@ -1,4 +1,4 @@
-# Gabriel Torres – Engineering Portfolio
+# Gabriel Torres – Engineering Projects
 
 ![C](https://img.shields.io/badge/C-lightblue)
 ![C++](https://img.shields.io/badge/C++-blue)
