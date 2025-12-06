@@ -33,7 +33,7 @@ Hi! I'm **Gabriel Torres**, an Electrical Engineer and a Computer Science studen
 
 - [Download CV (PDF)](CV/GabrielTorres_CV.pdf)  
 - LinkedIn: [linkedin.com/in/gabriel-torres](https://linkedin.com/in/gabriel-torres-garbanzo)  
-- Portfolio: [github.com/gabtor01](https://github.com/gabtor01)  
+- Portfolio: [gabtor01/portfolio](https://gabtor01.github.io/gabriel-torres-portfolio/)  
 - Email: gabriel.torres.garbanzo@gmail.com
 
 ---
