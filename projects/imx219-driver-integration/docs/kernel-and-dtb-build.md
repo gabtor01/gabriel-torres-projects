@@ -58,7 +58,9 @@ The active device tree filename was identified using:
 cat /proc/device-tree/nvidia,dtsfilename
 ```
 
-This step is critical to ensure system recovery in case of boot failures.
+This step ensures system recovery in case of boot failures.
+
+![Device Tree Confirmation](images/device-tree-identified.png)
 
 ---
 
@@ -129,6 +131,8 @@ ls /dev/video*
 
 Initially, no video devices were present.
 
+![No Video Device Module](images/no-dev-module.png)
+
 The IMX219 driver module was then manually inserted:
 
 ```bash
@@ -139,6 +143,8 @@ sudo insmod /home/nvidia/imx219.ko
 
 * The module loaded successfully
 * A video device node `/dev/video0` was created
+
+![Video Device Module](images/dev-module-created.png)
 
 This confirms that:
 

@@ -20,21 +20,10 @@ Special care was taken to correctly orient the FFC cable to avoid power or signa
 
 Based on the Jetson Nano Camera Design Guide and the IMX219 datasheet:
 
-* **Expected I2C bus:** Camera I2C bus routed through the CSI connector (via I2C mux)
+* **Expected I2C bus:** Camera I2C bus routed through the CSI connector
 * **IMX219 slave address:** `0x10` (7-bit address)
 
 The camera should appear on the I2C bus once it is powered and released from reset.
-
----
-
-## Installing I2C Tools
-
-To inspect the I2C bus from user space, the `i2c-tools` package was installed:
-
-```bash
-sudo apt update
-sudo apt install i2c-tools
-```
 
 ---
 
@@ -51,13 +40,15 @@ sudo i2cdetect -r -y <bus_number>
 * The IMX219 did not appear at address `0x10`
 * The bus scan returned no responsive device at the expected address
 
-This behavior indicates that the sensor was either not powered, held in reset or not yet enabled by a control GPIO.
+This indicated that the sensor was either not powered, held in reset, or not yet enabled by a control GPIO.
+
+![i2c detection before enabling gpio](images/initial-i2c-detection.png)
 
 ---
 
 ## Why the Camera May Not Appear on I2C
 
-Reviewing the Raspberry Pi Camera Module v2 schematic reveals that:
+Reviewing the Raspberry Pi Camera Module v2 schematic revealed that:
 
 * The IMX219 requires an **enable/reset GPIO** to be asserted
 * Power rails alone are insufficient to activate the sensor
@@ -80,7 +71,7 @@ The exact label depends on BSP version and is used internally by the kernel and 
 
 The file `tegra-gpio.h` from the Jetson kernel sources provides the formula to convert a GPIO label into a numeric GPIO identifier.
 
-```C
+```c
 #define TEGRA_GPIO_PORT_S 18
 
 #define TEGRA_GPIO(port, offset) \
@@ -88,22 +79,30 @@ The file `tegra-gpio.h` from the Jetson kernel sources provides the formula to c
 ```
 
 | Jetson Nano Signal Name | GPIO        |
-|------------------------|-------------|
-| CAM0_PWDN              | GPIO3_PS.07 |
+| ----------------------- | ----------- |
+| CAM0_PWDN               | GPIO3_PS.07 |
 
-Using the port and offset information defined in the Pinmux configuration, the corresponding GPIO number was calculated as follows ```(18*8)+7=151```.
+Using the port and offset information defined in the Pinmux configuration:
+
+```text
+(18 × 8) + 7 = 151
+```
+
+Therefore, the camera GPIO used during validation was **GPIO 151**.
 
 ---
 
 ## Enabling the Camera via GPIO
 
-Once the GPIO number was known, the following sequence was executed to enable the camera:
+Once the GPIO number was known, the following sequence was executed:
 
 ```bash
 sudo su
-echo <GPIO_NUM> > /sys/class/gpio/export
-echo out > /sys/class/gpio/gpio<GPIO_NUM>/direction
-echo 1 > /sys/class/gpio/gpio<GPIO_NUM>/value
+
+echo 151 > /sys/class/gpio/export
+echo out > /sys/class/gpio/gpio151/direction
+echo 1 > /sys/class/gpio/gpio151/value
+
 exit
 ```
 
@@ -112,6 +111,8 @@ This sequence:
 * Exports the GPIO
 * Configures it as an output
 * Drives it high to release the camera from reset
+
+Note: this sequence of commands is already implemented in the script `camera-gpio.sh`.
 
 ---
 
@@ -125,38 +126,55 @@ sudo i2cdetect -r -y <bus_number>
 
 ### Result
 
-* The IMX219 appeared at address **0x10**
-* Successful acknowledgment confirms proper power and control sequencing
+* The IMX219 appeared at address **`0x10`**
+* Successful acknowledgment confirmed proper power and control sequencing
 
-This validates that the camera sensor is correctly connected and responsive on the I2C bus.
+This validated that the camera sensor was correctly connected and responsive on the I2C bus.
+
+![i2c detection after enabling gpio](images/final-i2c-detection.png)
 
 ---
 
-## Reading Camera Registers
+## Reading the IMX219 Model ID
 
-The `i2c-tools` package also allows direct register access. To verify sensor identity, the **Model ID register** was read using the command confirmed with the course instructor.
+The IMX219 datasheet defines the **MODEL_ID** as a 16-bit value stored in two consecutive registers:
 
-Example command:
-
-```bash
-sudo i2cget -y <bus_number> 0x10 <register_address>
+```text
+0x02 0x19 -> 0x0219
 ```
 
-### Result
+![IMX219 Datasheet Model ID Registers](images/model-id.png)
 
-* The returned value matched the expected IMX219 Model ID
-* This confirms successful low-level communication with the sensor
+The registers were read directly from user space using `i2ctransfer`:
+
+```bash
+sudo i2ctransfer -y <bus_number> w2@0x10 0x00 0x00 r1
+sudo i2ctransfer -y <bus_number> w2@0x10 0x00 0x01 r1
+```
+
+The expected results are:
+
+```text
+0x02
+0x19
+```
+
+
+![Read Model ID](images/check-model-id.png)
+
+This matches the IMX219 chip ID used by the Linux driver.
 
 ---
 
 ## Summary
 
-* Initial I2C scan failed due to camera enable GPIO not being asserted
-* Proper GPIO configuration is required before I2C communication is possible
-* After enabling the GPIO, the IMX219 appeared at address `0x10`
-* Direct register access confirmed correct sensor identification
+* Initial I2C scan failed because the camera enable GPIO was not asserted
+* GPIO 151 was configured and driven high
+* The IMX219 then appeared at I2C address `0x10`
+* Registers `0x0000` and `0x0001` were read using `i2ctransfer`
+* The returned values `0x02` and `0x19` identify the sensor as IMX219 (`0x0219`)
 
-This step validates the electrical connection, power sequencing, and control interface required for successful driver operation.
+This step validates the electrical connection, power sequencing, I2C communication, and sensor identification required for successful driver operation.
 
 ---
 

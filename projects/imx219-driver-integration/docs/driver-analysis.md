@@ -7,6 +7,7 @@ This section analyzes the software components involved in supporting the Sony IM
 The following source files were reviewed:
 
 * `tegra210-camera-rbpcv2-dual-imx219.dtsi`
+* `tegra210-p3448-0000-p3449-0000-b00.dts`
 * `imx219.c`
 * `imx219_mode_tbls.h`
 
