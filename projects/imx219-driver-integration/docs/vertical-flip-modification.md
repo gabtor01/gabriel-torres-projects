@@ -72,22 +72,35 @@ The following captures show the camera output before and after applying the vert
 | Before Modification                           | After Modification                           |
 | --------------------------------------------- | -------------------------------------------- |
 | **Original orientation**                      | **Vertical flip enabled**                    |
-| [▶ View video](docs/videos/capture_2026-09-17_12-10-31.mp4) | [▶ View video](results/video/after-flip.mp4) |
+| <video src="videos/capture_2026-09-17_12-10-31.mp4" width="100%" controls></video> | <video src="videos/capture_2026-09-20_15-03-19.mp4" width="100%" controls></video> |
 
-The resulting video exhibited a **vertical flip** relative to the original orientation, confirming that the register-level modification was applied successfully.
+The resulting video exhibited a vertical flip relative to the original orientation, confirming that the register-level modification was applied successfully.
+
+---
+
+## Bayer Pattern Observation
+
+Although the image orientation was correctly flipped, the resulting image exhibited a strong purple color cast.
+
+The observation suggests that the vertical transformation changes the effective Bayer pattern orientation, while the subsequent image processing continues to interpret the data using the original Bayer arrangement.
+
+This issue is investigated separately in:
+
+bayer-pattern-correction.md
 
 ---
 
 ## Summary
 
-* IMX219 image orientation is controlled by register `0x0172`.
+* IMX219 image orientation is controlled by register 0x0172.
 * Bit 1 enables vertical flipping.
-* `0x0172 = 0x02` was added to the `1640x1232 @ 30 FPS` mode.
-* The modification was validated through real video capture.
+* 0x0172 = 0x02 was added to the 1640x1232 @ 30 FPS mode.
+* The modification successfully flipped the image vertically.
+* A change in color reproduction was observed after the flip, leading to a separate investigation of the Bayer pattern.
 
 ---
 
 ## References
 
-* Sony IMX219 Datasheet
-* GStreamer Documentation
+* [Sony IMX219 Datasheet](https://www.opensourceinstruments.com/Electronics/Data/IMX219PQ.pdf)
+* [GStreamer Documentation](https://gstreamer.freedesktop.org/documentation/)
