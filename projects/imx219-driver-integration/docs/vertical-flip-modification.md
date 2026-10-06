@@ -71,8 +71,7 @@ The following captures show the camera output before and after applying the vert
 
 | Before Modification                           | After Modification                           |
 | --------------------------------------------- | -------------------------------------------- |
-| **Original orientation**                      | **Vertical flip enabled**                    |
-| <video src="videos/capture_2026-09-17_12-10-31.mp4" width="100%" controls></video> | <video src="videos/capture_2026-09-20_15-03-19.mp4" width="100%" controls></video> |
+| <video src="https://github.com/user-attachments/assets/48c84c04-c3d3-485a-8778-854162a84efc"></video> | <video src="https://github.com/user-attachments/assets/b8ac68e7-09c5-4df9-8342-b68f3e147613"></video> |
 
 The resulting video exhibited a vertical flip relative to the original orientation, confirming that the register-level modification was applied successfully.
 
@@ -84,9 +83,7 @@ Although the image orientation was correctly flipped, the resulting image exhibi
 
 The observation suggests that the vertical transformation changes the effective Bayer pattern orientation, while the subsequent image processing continues to interpret the data using the original Bayer arrangement.
 
-This issue is investigated separately in:
-
-bayer-pattern-correction.md
+This issue is investigated separately in the [bayer pattern correction](bayer-pattern-correction) documentation.
 
 ---
 
