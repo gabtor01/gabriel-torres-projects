@@ -317,7 +317,7 @@
 
 					active_w = "1640";
 					active_h = "1232";
-					pixel_t = "bayer_rggb";
+					pixel_t = "bayer_gbrg";
 					readout_orientation = "90";
 					line_length = "3448";
 					inherent_gain = "1";
