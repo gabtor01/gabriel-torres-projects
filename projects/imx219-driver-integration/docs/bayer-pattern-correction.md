@@ -218,11 +218,12 @@ The following captures compare the camera output before and after correcting the
 
 | Before correcting the Bayer phase  | After correcting the Bayer phase  |
 :---: | :---:|
-| <video src="https://github.com/user-attachments/assets/b8ac68e7-09c5-4df9-8342-b68f3e147613"></video> | <video src=""></video> |
+| <video src="https://github.com/user-attachments/assets/b8ac68e7-09c5-4df9-8342-b68f3e147613"></video> | <video src="https://github.com/user-attachments/assets/8a87e6fc-12e8-49b6-8a5b-9a17fe8e251c"></video> |
 
 After configuring the IMX219 sensor modes consistently as `bayer_gbrg`, the Argus/ISP pipeline processed the Bayer data correctly, restoring the expected colors while preserving the hardware vertical flip.
 
 ------------------------------------------------------------------------
+
 
 ## Summary
 
