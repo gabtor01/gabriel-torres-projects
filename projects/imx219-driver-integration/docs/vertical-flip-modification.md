@@ -69,8 +69,8 @@ The modified driver was loaded and the camera was tested using the `1640x1232 @ 
 
 The following captures show the camera output before and after applying the vertical flip register modification.
 
-| Before Modification                           | After Modification                           |
-| --------------------------------------------- | -------------------------------------------- |
+| Before enabling the hardware vertical flip  | After enabling the hardware vertical flip  |
+:---: | :---:|
 | <video src="https://github.com/user-attachments/assets/48c84c04-c3d3-485a-8778-854162a84efc"></video> | <video src="https://github.com/user-attachments/assets/b8ac68e7-09c5-4df9-8342-b68f3e147613"></video> |
 
 The resulting video exhibited a vertical flip relative to the original orientation, confirming that the register-level modification was applied successfully.
