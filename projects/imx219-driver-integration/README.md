@@ -77,7 +77,7 @@ flowchart TB
     %% Userspace
     U2 <--> U3
 
-    %% Userspace ↔ Kernel
+    %% Userspace to Kernel
     U1 <--> K1
     U2 <--> K2
 
@@ -90,21 +90,23 @@ flowchart TB
     H2 --> H3
     H3 --> H4
 
-    %% Control / framework
+    %% Control path
     K3 -.->|"I2C Control"| H1
     K2 <--> H3
     K2 <--> H4
 
     %% Layer colors
-    style HARDWARE fill:#f8cccc,stroke:#d66
-    style KERNEL fill:#e3d7eb,stroke:#9273a8
-    style USERSPACE fill:#d9efd6,stroke:#78a875
+    style USERSPACE fill:#1F3D2B,stroke:#56D364,color:#F0F6FC
+    style KERNEL fill:#352A4F,stroke:#BC8CFF,color:#F0F6FC
+    style HARDWARE fill:#4C1D24,stroke:#FF7B72,color:#F0F6FC
 
     %% Components
-    classDef component fill:#fff,stroke:#444,color:#222
+    classDef component fill:#161B22,stroke:#8B949E,color:#F0F6FC,stroke-width:1.5px
     class U1,U2,U3,K1,K2,K3,H1,H2,H3,H4 component
-    linkStyle default stroke:#000,stroke-width:2px;
-```
+
+    %% Connections
+    linkStyle default stroke:#F0F6FC,stroke-width:2px
+```    
 
 The sensor is configured through I2C, while image data is transmitted
 as RAW Bayer data over MIPI CSI-2. The Jetson camera stack then exposes
