@@ -103,6 +103,7 @@ flowchart TB
     %% Components
     classDef component fill:#fff,stroke:#444,color:#222
     class U1,U2,U3,K1,K2,K3,H1,H2,H3,H4 component
+    linkStyle default stroke:#000,stroke-width:2px;
 ```
 
 The sensor is configured through I2C, while image data is transmitted
