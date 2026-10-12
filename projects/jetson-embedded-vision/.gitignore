@@ -1,0 +1,195 @@
+# Operating system and editor files
+.DS_Store
+Thumbs.db
+*~
+*.swp
+*.swo
+*.orig
+*.rej
+
+.vscode/*
+!.vscode/settings.json
+!.vscode/extensions.json
+.idea/
+
+
+# C / C++ compilation artifacts
+*.o
+*.obj
+*.a
+*.so
+*.so.*
+*.dylib
+*.dll
+*.exe
+*.out
+*.elf
+*.bin
+
+*.gcda
+*.gcno
+*.gcov
+*.profraw
+*.profdata
+
+# Debugging
+core
+core.*
+*.core
+gmon.out
+
+
+# CMake and build directories
+build/
+build-*/
+cmake-build-*/
+
+CMakeFiles/
+CMakeCache.txt
+cmake_install.cmake
+CTestTestfile.cmake
+compile_commands.json
+Makefile.cmake
+
+.ninja_deps
+.ninja_log
+build.ninja
+
+
+# Linux kernel build artifacts
+*.ko
+*.mod
+*.mod.c
+*.mod.o
+*.cmd
+*.order
+*.symvers
+
+Module.symvers
+modules.order
+
+.tmp_versions/
+.output/
+out/
+
+# Kernel configuration generated locally
+.config
+.config.old
+.config.*
+!.config.example
+
+# Generated kernel images
+Image
+Image.gz
+zImage
+vmlinux
+vmlinuz
+System.map
+
+# Device Tree build artifacts
+*.dtb
+*.dtbo
+*.dtb.S
+
+# Kernel temporary files
+*.tmp
+*.dt.yaml
+
+
+# Yocto / BitBake
+yocto/build/
+yocto/build-*/
+yocto/tmp/
+yocto/cache/
+yocto/downloads/
+yocto/sstate-cache/
+
+tmp-glibc/
+sstate-cache/
+downloads/
+cache/
+
+bitbake.lock
+bitbake.sock
+
+# Generated images and filesystems
+*.wic
+*.wic.*
+*.ext4
+*.rootfs.*
+*.squashfs
+*.tar.bz2
+*.tar.gz
+*.tar.xz
+*.tar.zst
+
+
+# Docker
+docker-compose.override.yml
+
+# Docker runtime data and volumes
+docker/data/
+docker/volumes/
+
+# Environment variables and secrets
+.env
+.env.*
+!.env.example
+
+
+# Python utilities
+__pycache__/
+*.py[cod]
+
+.venv/
+venv/
+env/
+
+.pytest_cache/
+.mypy_cache/
+.ruff_cache/
+
+
+# Video and camera captures
+*.raw
+*.yuv
+*.h264
+*.h265
+*.264
+*.265
+
+*.mp4
+*.avi
+*.mkv
+*.mov
+
+
+# AI / ML artifacts
+*.onnx
+*.engine
+*.plan
+*.pt
+*.pth
+*.ckpt
+*.weights
+
+
+# Logs, benchmarks and runtime output
+*.log
+logs/
+
+results/raw/
+benchmarks/raw/
+
+
+# Temporary files
+*.bak
+*.temp
+*.swp
+
+tmp/
+temp/
+
+
+# Keep documentation and source files
+!.gitkeep
