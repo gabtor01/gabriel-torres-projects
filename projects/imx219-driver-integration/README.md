@@ -33,7 +33,7 @@ The project is documented progressively. The recommended reading order is:
 
 | Stage | Documentation | Description |
 |:---:|---|---|
-| 01 | [Hardware Interface](docs/hardware-interface.md) | IMX219 interfaces, camera connector, and Jetson Nano CSI signals. |
+| 01 | [Hardware Interface](docs/hardware-overview.md) | IMX219 interfaces, camera connector, and Jetson Nano CSI signals. |
 | 02 | [I2C Validation](docs/i2c-validation.md) | Verification of sensor communication and I2C address `0x10`. |
 | 03 | [Kernel and Device Tree Build](docs/kernel-and-dtb-build.md) | Kernel, modules, and Device Tree compilation and deployment. |
 | 04 | [Driver Analysis](docs/driver-analysis.md) | Structure and operation of the NVIDIA IMX219 sensor driver. |
