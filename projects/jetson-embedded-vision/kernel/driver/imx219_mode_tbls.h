@@ -289,6 +289,83 @@ static imx219_reg imx219_mode_1280x720_60fps[] = {
 	{IMX219_TABLE_END, 0x00}
 };
 
+/* Custom capture 1024x768 @60fps mode under development for jetson-embedded-vision */
+static imx219_reg imx219_mode_1024x768_60fps[] = {
+        /* Capture settings */
+
+        {0x0157, 0x00}, /* ANALOG_GAIN_GLOBAL[7:0] */
+
+        /* Coarse integration time = 400 lines */
+        {0x015A, 0x01},
+        {0x015B, 0x90},
+
+        /* Frame timing */
+
+        /* Frame length = 880 lines */
+        {0x0160, 0x03},
+        {0x0161, 0x70},
+
+        /* Line length = 3448 pixels */
+        {0x0162, 0x0D},
+        {0x0163, 0x78},
+
+        /* Region of Interest */
+
+        /* X start = 1128 */
+        {0x0164, 0x04},
+        {0x0165, 0x68},
+
+        /* X end = 2151 */
+        {0x0166, 0x08},
+        {0x0167, 0x67},
+
+        /* Y start = 848 */
+        {0x0168, 0x03},
+        {0x0169, 0x50},
+
+        /* Y end = 1615 */
+        {0x016A, 0x06},
+        {0x016B, 0x4F},
+
+        /* Output width = 1024 */
+        {0x016C, 0x04},
+        {0x016D, 0x00},
+
+        /* Output height = 768 */
+        {0x016E, 0x03},
+        {0x016F, 0x00},
+
+        /* Pixel increment */
+        {0x0170, 0x01},
+        {0x0171, 0x01},
+		
+		/* Vertical flip*/
+		{0x0172, 0x02}, 
+
+        /* Disable binning */
+        {0x0174, 0x00},
+        {0x0175, 0x00},
+
+        /* CSI-2 RAW10 */
+        {0x018C, 0x0A},
+        {0x018D, 0x0A},
+
+        /* Clock configuration */
+
+        {0x0301, 0x05},
+        {0x0303, 0x01},
+        {0x0304, 0x03},
+        {0x0305, 0x03},
+        {0x0306, 0x00},
+        {0x0307, 0x39},
+        {0x0309, 0x0A},
+        {0x030B, 0x01},
+        {0x030C, 0x00},
+        {0x030D, 0x72},
+
+        {IMX219_TABLE_END, 0x00}
+};
+
 /*
 static imx219_reg imx219_mode_1280x720_120fps[] = {
 	// capture settings
@@ -338,6 +415,8 @@ enum {
 	IMX219_MODE_1920x1080_30FPS,
 	IMX219_MODE_1640x1232_30FPS,
 	IMX219_MODE_1280x720_60FPS,
+	//IMX219_MODE_1280x720_120FPS,
+	IMX219_MODE_1024x768_60FPS,
 
 	IMX219_MODE_COMMON,
 	IMX219_START_STREAM,
@@ -350,6 +429,8 @@ static imx219_reg *mode_table[] = {
 	[IMX219_MODE_1920x1080_30FPS] = imx219_mode_1920x1080_30fps,
 	[IMX219_MODE_1640x1232_30FPS] = imx219_mode_1640x1232_30fps,
 	[IMX219_MODE_1280x720_60FPS] = imx219_mode_1280x720_60fps,
+	//[IMX219_MODE_1280x720_120FPS] = imx219_mode_1280x720_120fps,
+	[IMX219_MODE_1024x768_60FPS] = imx219_mode_1024x768_60fps,
 
 	[IMX219_MODE_COMMON]  = imx219_mode_common,
 	[IMX219_START_STREAM]  = imx219_start_stream,
@@ -372,6 +453,12 @@ static const int imx219_60fps[] = {
 	60,
 };
 
+/* static const int imx219_120fps[] = {
+*        120,
+*};
+*/
+
+
 /*
  * WARNING: frmfmt ordering need to match mode definition in
  * device tree!
@@ -383,6 +470,8 @@ static const struct camera_common_frmfmt imx219_frmfmt[] = {
 	{{1920, 1080},	imx219_30fps, 1, 0, IMX219_MODE_1920x1080_30FPS},
 	{{1640, 1232},	imx219_30fps, 1, 0, IMX219_MODE_1640x1232_30FPS},
 	{{1280, 720},	imx219_60fps, 1, 0, IMX219_MODE_1280x720_60FPS},
+	//{{1280, 720},   imx219_120fps, 1, 0, IMX219_MODE_1280x720_120FPS},
+	{{1024, 768}, 	imx219_60fps, 1, 0, IMX219_MODE_1024x768_60FPS},
 };
 
 #endif /* __IMX219_I2C_TABLES__ */
