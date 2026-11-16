@@ -40,13 +40,14 @@ gmon.out
 
 
 # CMake and build directories
-build/
-build-*/
+**/build/
+**/build-*/
 cmake-build-*/
 
-CMakeFiles/
-CMakeCache.txt
-cmake_install.cmake
+**/CMakeFiles/
+**/CMakeCache.txt
+**/cmake_install.cmake
+**/Makefile
 CTestTestfile.cmake
 compile_commands.json
 Makefile.cmake
