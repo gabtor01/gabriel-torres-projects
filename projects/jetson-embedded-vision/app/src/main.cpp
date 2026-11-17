@@ -1,6 +1,7 @@
 #include <iostream>
 #include <gst/gst.h>
 #include <string>
+#include <sstream>
 #include <iomanip>
 
 // Report capture performance
@@ -16,18 +17,47 @@ static void on_fps_measurement(
             << " | Average FPS: " << average_fps << std::endl;
 }
 
+bool isIPv4Valid(const std::string* ip){
+  if (ip == nullptr) return false;
+
+  if (ip->length() < 7 || ip->length() > 15) return false;
+
+  std::stringstream ss(*ip);
+  std::string segment;
+  int parts = 0;
+
+  while (std::getline(ss, segment, '.')){
+    parts++;
+    if (segment.empty() || segment.length() > 3) return false;
+
+    if (segment.length() > 1 && segment[0] == '0') return false;
+
+    for (char c : segment){
+      if (!std::isdigit(c)) return false;
+    }
+    int num = std::stoi(segment);
+    if (num < 0 || num > 255) return false;
+  }
+  return (parts == 4 && ip->back() != '.');
+}
+
 int main(int argc, char* argv[]){
   // Initialize GStreamer
   gst_init(&argc, &argv);
 
   // Number of frames to capture
-  int num_buffers = 600;
+  int num_buffers = 1800;
+  // IP to stream the capture
+  std::string host_ip = "192.168.1.24";
 
-  if (argc > 1){
+  if (argc = 3){
     try {
       num_buffers = std::stoi(argv[1]);
+      host_ip = argv[2];
+
     } catch(...){
-      std::cerr << "Invalid buffer count." << std::endl;
+      std::cerr << "Usage: " << argv[0] 
+                << " <number_buffers> <receiver_IPv4>" << std::endl;
       return 1;
     }
   }
@@ -37,21 +67,23 @@ int main(int argc, char* argv[]){
     return 1;
   }
   
+  if (!isIPv4Valid(&host_ip)){
+    std::cerr << "You must provide a valid IPv4 address." << std::endl;
+    return 1;
+  }
+
   // Camera pipeline structure
   std::string pipeline_description = 
     "nvarguscamerasrc sensor-id=0 num-buffers=" +
     std::to_string(num_buffers) +
     " ! video/x-raw(memory:NVMM),"
     "width=1024,height=768,framerate=60/1"
-    " ! fpsdisplaysink name=fps "
-    "video-sink=fakesink "
-    "text-overlay=false "
-    "signal-fps-measurements=true "
-    "sync=false";
+    " ! nvv4l2h264enc bitrate=4000000 insert-sps-pps=true"
+    " ! h264parse"
+    " ! rtph264pay pt=96 config-interval=1"
+    " ! udpsink host=" + host_ip + " port=5000 sync=false";
 
   GError* error = nullptr;
-
-  std::cout << "Pipeline: " << pipeline_description << std::endl; // Check built pipeline
 
   GstElement* pipeline = gst_parse_launch(
     pipeline_description.c_str(), &error);
@@ -70,22 +102,22 @@ int main(int argc, char* argv[]){
     return 1;
   }
   
-  // Get the fps measurement element
-  GstElement* fps_sink = gst_bin_get_by_name(GST_BIN(pipeline), "fps");
-
-  if (fps_sink == nullptr){
-    std::cerr << "FPS element not found." << std::endl;
-    gst_object_unref(pipeline);
-    return 1;
-  }
-  
-  g_signal_connect(
-    fps_sink,
-    "fps-measurements",
-    G_CALLBACK(on_fps_measurement),
-    nullptr);
-  
-  gst_object_unref(fps_sink);
+// Get the fps measurement element
+// GstElement* fps_sink = gst_bin_get_by_name(GST_BIN(pipeline), "fps");
+//
+//  if (fps_sink == nullptr){
+//    std::cerr << "FPS element not found." << std::endl;
+//    gst_object_unref(pipeline);
+//    return 1;
+//  }
+//  
+//  g_signal_connect(
+//    fps_sink,
+//    "fps-measurements",
+//    G_CALLBACK(on_fps_measurement),
+//    nullptr);
+//  
+//  gst_object_unref(fps_sink);
   
   // Get the pipeline message bus
   GstBus* bus = gst_element_get_bus(pipeline);
