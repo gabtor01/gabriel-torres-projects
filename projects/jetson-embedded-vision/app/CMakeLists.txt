@@ -17,6 +17,11 @@ pkg_check_modules(GSTREAMER REQUIRED IMPORTED_TARGET
 # Build application
 add_executable(jetson_vision
     src/main.cpp
+    src/CameraPipeline.cpp
+)
+
+target_include_directories(jetson_vision PRIVATE
+  "${CMAKE_CURRENT_SOURCE_DIR}/include"  
 )
 
 # Link GStreamer libraries
